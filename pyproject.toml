@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 sqlalchemy = "^2.0.29"
+flask = "^3.0.2"
+flask-cors = "^4.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
