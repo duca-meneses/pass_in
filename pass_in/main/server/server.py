@@ -1,19 +1,12 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask
+from flask_cors import CORS
 
-from pass_in.main.routes.event_routes import event_router
+from pass_in.models.settings.connection import db_connection_handler
 
-app = FastAPI()
+db_connection_handler.connect_to_db()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-)
+app = Flask(__name__)
+CORS(app)
 
-
-@app.get('/')
-def read_root():
-    return {'message': 'FastAPI está ligado.'}
-
-
-app.include_router(event_router)
+from pass_in.main.routes.event_routes import event_route_bp
+app.register_blueprint(event_route_bp)
