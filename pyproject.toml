@@ -6,7 +6,7 @@ authors = ["Carlos Eduardo <ducameneses16@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 sqlalchemy = "^2.0.29"
 flask = "^3.0.2"
 flask-cors = "^4.0.0"
