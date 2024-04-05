@@ -40,7 +40,7 @@ To get started, follow the steps below
 How to clone your project
 
 ```bash
-git clone https://github.com/duca-meneses/tracks-api.git
+git clone https://github.com/duca-meneses/pass_in.git
 ```
 
 After cloning the project
