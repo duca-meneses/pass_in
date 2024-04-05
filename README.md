@@ -88,18 +88,18 @@ python app.py
 Here you can list the main routes of your API, and what are their expected request bodies.
 
 | event route             |     description                |
-| ----------------------- | :------------------:           |
+| ----------------------- | :---------------------------:  |
 | GET /events/eventId     |   Get event by eventId         |
 | POST /events            |    Create an event             |
 
 | attendees route               |     description          |
-| ---------------------------   | :------------------:     |
+| ---------------------------   | :----------------------: |
 | GET /events/eventId/attendees | Get event attendees      |
 | POSt /events/eventId/register | Register an attendee     |
 | GET /attendees/attendeesId/badge | Get an attendee badge |
 
 | check-ins routes |                description            |
-| ---------------  | :---------------------------------:   |
+| ---------------  | :-----------------------------------: |
 | POST /attendees/attendeesId/check-in | Check-in attendee |
 
 <h2 id="author">Author</h2>
