@@ -6,6 +6,8 @@ from pass_in.models.settings.connection import db_connection_handler
 from pass_in.models.entities.attendees import Attendees
 from pass_in.models.entities.check_ins import CheckIns 
 from pass_in.models.entities.events import Events
+from pass_in.errors.error_types.http_conflict import HttpConflictError
+
 
 class AttendeesRepository:
 
@@ -25,7 +27,7 @@ class AttendeesRepository:
 
                 return attendee_info
             except IntegrityError:
-                raise Exception('Participante ja cadastrado')
+                raise HttpConflictError('Participante ja cadastrado')
             except Exception as exception:
                 database.session.rollback()
                 raise exception
