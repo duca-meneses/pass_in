@@ -1,9 +1,10 @@
-from typing import Dict
+from typing import Dict, List
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
 from pass_in.models.settings.connection import db_connection_handler
 from pass_in.models.entities.attendees import Attendees
+from pass_in.models.entities.check_ins import CheckIns 
 from pass_in.models.entities.events import Events
 
 class AttendeesRepository:
@@ -29,7 +30,7 @@ class AttendeesRepository:
                 database.session.rollback()
                 raise exception
 
-    def get_attendee_badge_by_id(self, attendee_id: str):
+    def get_attendees_badge_by_id(self, attendee_id: str):
         with db_connection_handler as database:
             try:
                 attendee = (
@@ -47,4 +48,21 @@ class AttendeesRepository:
                 return attendee
             except NoResultFound:
                 return None
-        
+
+    def get_attendees_by_event_id(self, event_id: str) -> List[Attendees]:
+        with db_connection_handler as database:
+            attendees = (
+                database.session
+                    .query(Attendees)
+                    .outerjoin(CheckIns, CheckIns.attendeeId==Attendees.id)
+                    .filter(Attendees.event_id==event_id)
+                    .with_entities(
+                        Attendees.id,
+                        Attendees.name,
+                        Attendees.email,
+                        CheckIns.created_at.label('checkedInAt'),
+                        Attendees.created_at.label('createdAt')
+                    )
+                    .all()
+            )
+            return attendees
